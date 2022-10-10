@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PhoneMarket.Domain.Entity;
+using PhoneMarket.Domain.Enum;
 using PhoneMarket.Models;
 using System.Diagnostics;
 
@@ -15,7 +17,20 @@ namespace PhoneMarket.Controllers
 
 		public IActionResult Index()
 		{
-			return View();
+			var phone = new Phone()
+			{
+				Name = "Samsung A12",
+				Model = "Smartphone",
+				Price = 25000,
+				TypeOperatingSystem = TypeOperatingSystem.Other
+			};
+
+			var phones = new List<Phone>()
+			{
+				phone
+			};
+
+			return View(phones);
 		}
 
 		public IActionResult Privacy()
