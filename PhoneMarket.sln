@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneMarket", "PhoneMarket\PhoneMarket.csproj", "{418FE854-B97F-401C-AAA9-239E6C481D9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneMarket", "PhoneMarket\PhoneMarket.csproj", "{418FE854-B97F-401C-AAA9-239E6C481D9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneMarket.Domain", "PhoneMarket.Domain\PhoneMarket.Domain.csproj", "{C414CB8C-E0EC-4D6B-9453-D0A2A2D972CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneMarket.Domain", "PhoneMarket.Domain\PhoneMarket.Domain.csproj", "{C414CB8C-E0EC-4D6B-9453-D0A2A2D972CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneMarket.DAL", "PhoneMarket.DAL\PhoneMarket.DAL.csproj", "{45974F05-3446-47CB-878D-30FFB5FC7B5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{C414CB8C-E0EC-4D6B-9453-D0A2A2D972CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C414CB8C-E0EC-4D6B-9453-D0A2A2D972CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C414CB8C-E0EC-4D6B-9453-D0A2A2D972CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45974F05-3446-47CB-878D-30FFB5FC7B5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45974F05-3446-47CB-878D-30FFB5FC7B5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45974F05-3446-47CB-878D-30FFB5FC7B5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45974F05-3446-47CB-878D-30FFB5FC7B5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
