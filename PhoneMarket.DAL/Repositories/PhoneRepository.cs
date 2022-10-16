@@ -53,15 +53,15 @@ namespace PhoneMarket.DAL.Repositories
 		public async Task<IEnumerable<Phone>> GetByOSAsync(TypeOperatingSystem typeOS)
 		{
 			return await Task.Run(
-								 () => _db.Phones.Where(p => p.TypeOperatingSystem == typeOS)
-							  );
+				() => _db.Phones.Where(p => p.TypeOperatingSystem == typeOS)
+			);
 		}
 
 		public async Task<IEnumerable<Phone>> GetByPriceAsync(int minPrice, int maxPrice)
 		{
 			return await Task.Run(
-								 () => _db.Phones.Where(p => p.Price <= minPrice && p.Price >= maxPrice)
-							  ); 
+				() => _db.Phones.Where(p => p.Price <= minPrice && p.Price >= maxPrice)
+			); 
 		}
 	}
 }

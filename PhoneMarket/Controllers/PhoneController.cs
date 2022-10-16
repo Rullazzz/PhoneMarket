@@ -1,24 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PhoneMarket.DAL.Interfaces;
-using PhoneMarket.Domain.Entity;
+using PhoneMarket.Service.Interfaces;
 
 namespace PhoneMarket.Controllers
 {
 	public class PhoneController : Controller
 	{
-		private readonly IPhoneRepository _phoneRepository;
+		private readonly IPhoneService _phoneService;
 
-		public PhoneController(IPhoneRepository phoneRepository)
+		public PhoneController(IPhoneService phoneService)
 		{
-			_phoneRepository = phoneRepository;
+			_phoneService = phoneService;
 		}
 
 		[HttpGet]
 		public async Task<IActionResult> GetPhones()
 		{
-			var response = await _phoneRepository.GetAllAsync();
-
-			return View(response);
+			var response = await _phoneService.GetAllPhones();
+			if (response.StatusCode == Domain.Enum.StatusCode.OK)
+			{
+				return View(response);
+			}
+			return View("Error");
 		}
 	}
 }
