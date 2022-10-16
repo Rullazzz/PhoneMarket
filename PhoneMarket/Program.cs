@@ -1,13 +1,17 @@
 using Microsoft.EntityFrameworkCore;
 using PhoneMarket.DAL;
+using PhoneMarket.DAL.Interfaces;
+using PhoneMarket.DAL.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-string connection = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection));
-
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+string connection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection));
+builder.Services.AddScoped<IPhoneRepository, PhoneRepository>();
 
 var app = builder.Build();
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PhoneMarket.DAL.Interfaces;
 using PhoneMarket.Domain.Entity;
 using PhoneMarket.Domain.Enum;
 using PhoneMarket.Models;
@@ -10,25 +11,17 @@ namespace PhoneMarket.Controllers
 	{
 		private readonly ILogger<HomeController> _logger;
 
-		public HomeController(ILogger<HomeController> logger)
+		private readonly IPhoneRepository _phoneRepository;
+
+		public HomeController(ILogger<HomeController> logger, IPhoneRepository phoneRepository) 
 		{
 			_logger = logger;
+			_phoneRepository = phoneRepository;
 		}
 
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
-			var phone = new Phone()
-			{
-				Name = "Samsung A12",
-				Model = "Smartphone",
-				Price = 25000,
-				TypeOperatingSystem = TypeOperatingSystem.Other
-			};
-
-			var phones = new List<Phone>()
-			{
-				phone
-			};
+			var phones = await _phoneRepository.GetAllAsync();
 
 			return View(phones);
 		}
