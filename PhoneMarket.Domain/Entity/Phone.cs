@@ -10,7 +10,7 @@ namespace PhoneMarket.Domain.Entity
 
         public string Description { get; set; }
 
-        public string Model { get; set; }
+        public string TypePhone { get; set; }
 
         public decimal Price { get; set; }
 

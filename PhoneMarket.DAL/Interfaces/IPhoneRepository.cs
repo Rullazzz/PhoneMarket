@@ -5,10 +5,10 @@ namespace PhoneMarket.DAL.Interfaces
 {
 	public interface IPhoneRepository : IBaseRepository<Phone>
 	{
-		Phone GetByName(string name);
+		Task<Phone> GetByName(string name);
 
-		IEnumerable<Phone> GetByOS(TypeOperatingSystem typeOS);
+		Task<IEnumerable<Phone>> GetByOSAsync(TypeOperatingSystem typeOS);
 
-		IEnumerable<Phone> GetByPrice(int minPrice, int maxPrice);
+		Task<IEnumerable<Phone>> GetByPriceAsync(int minPrice, int maxPrice);
 	}
 }

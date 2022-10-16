@@ -11,22 +11,33 @@ namespace PhoneMarket.DAL.Repositories
 
 		public PhoneRepository(ApplicationDbContext db)
 		{
-			_db = db ?? throw new ArgumentNullException(nameof(db));
+			_db = db;
 		}
 
-		public bool Create(Phone entity)
+		public async Task<bool> CreateAsync(Phone entity)
 		{
-			throw new NotImplementedException();
+			await _db.Phones.AddAsync(entity);
+			await _db.SaveChangesAsync();
+
+			return true;
 		}
 
-		public bool Delete(Phone entity)
+		public async Task<bool> DeleteAsync(Phone entity)
 		{
-			throw new NotImplementedException();
+			var en = _db.Phones.Remove(entity);
+			await _db.SaveChangesAsync();
+
+			if (en.State != EntityState.Deleted)
+			{
+				return false;
+			}
+
+			return true;
 		}
 
-		public Phone Get(int id)
+		public async Task<Phone> GetAsync(int id)
 		{
-			throw new NotImplementedException();
+			return await _db.Phones.FirstOrDefaultAsync(p => p.Id == id);
 		}
 
 		public async Task<List<Phone>> GetAllAsync()
@@ -34,19 +45,23 @@ namespace PhoneMarket.DAL.Repositories
 			return await _db.Phones.ToListAsync();
 		}
 
-		public Phone GetByName(string name)
+		public async Task<Phone> GetByName(string name)
 		{
-			throw new NotImplementedException();
+			return await _db.Phones.FirstOrDefaultAsync(p => p.Name == name);
 		}
 
-		public IEnumerable<Phone> GetByOS(TypeOperatingSystem typeOS)
+		public async Task<IEnumerable<Phone>> GetByOSAsync(TypeOperatingSystem typeOS)
 		{
-			throw new NotImplementedException();
+			return await Task.Run(
+								 () => _db.Phones.Where(p => p.TypeOperatingSystem == typeOS)
+							  );
 		}
 
-		public IEnumerable<Phone> GetByPrice(int minPrice, int maxPrice)
+		public async Task<IEnumerable<Phone>> GetByPriceAsync(int minPrice, int maxPrice)
 		{
-			throw new NotImplementedException();
+			return await Task.Run(
+								 () => _db.Phones.Where(p => p.Price <= minPrice && p.Price >= maxPrice)
+							  ); 
 		}
 	}
 }

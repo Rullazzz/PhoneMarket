@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PhoneMarket.DAL.Interfaces;
-using PhoneMarket.Domain.Entity;
-using PhoneMarket.Domain.Enum;
 using PhoneMarket.Models;
 using System.Diagnostics;
 
@@ -11,19 +8,14 @@ namespace PhoneMarket.Controllers
 	{
 		private readonly ILogger<HomeController> _logger;
 
-		private readonly IPhoneRepository _phoneRepository;
-
-		public HomeController(ILogger<HomeController> logger, IPhoneRepository phoneRepository) 
+		public HomeController(ILogger<HomeController> logger)
 		{
 			_logger = logger;
-			_phoneRepository = phoneRepository;
 		}
 
-		public async Task<IActionResult> Index()
+		public IActionResult Index()
 		{
-			var phones = await _phoneRepository.GetAllAsync();
-
-			return View(phones);
+			return View();
 		}
 
 		public IActionResult Privacy()
