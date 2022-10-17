@@ -15,7 +15,7 @@ namespace PhoneMarket.Controllers
 		[HttpGet]
 		public async Task<IActionResult> GetPhones()
 		{
-			var response = await _phoneService.GetAllPhones();
+			var response = await _phoneService.GetAllPhonesAsync();
 			if (response.StatusCode == Domain.Enum.StatusCode.OK)
 			{
 				return View(response.Data);

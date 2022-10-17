@@ -45,7 +45,7 @@ namespace PhoneMarket.DAL.Repositories
 			return await _db.Phones.ToListAsync();
 		}
 
-		public async Task<Phone> GetByName(string name)
+		public async Task<Phone> GetByNameAsync(string name)
 		{
 			return await _db.Phones.FirstOrDefaultAsync(p => p.Name == name);
 		}
