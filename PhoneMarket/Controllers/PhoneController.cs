@@ -18,7 +18,7 @@ namespace PhoneMarket.Controllers
 			var response = await _phoneService.GetAllPhones();
 			if (response.StatusCode == Domain.Enum.StatusCode.OK)
 			{
-				return View(response);
+				return View(response.Data);
 			}
 			return View("Error");
 		}
