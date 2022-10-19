@@ -20,5 +20,7 @@ namespace PhoneMarket.Service.Interfaces
 		Task<IBaseResponse<IEnumerable<Phone>>> GetByPriceAsync(int minPrice, int maxPrice);
 
 		Task<IBaseResponse<IEnumerable<Phone>>> GetAllPhonesAsync();
+
+		Task<IBaseResponse<Phone>> EditAsync(int id, PhoneViewModel model);
 	}
 }

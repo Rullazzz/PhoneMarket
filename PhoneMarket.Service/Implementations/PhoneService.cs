@@ -63,7 +63,7 @@ namespace PhoneMarket.Service.Implementations
 				if (phone == null)
 				{
 					baseResponse.Description = "There is no phone with this id";
-					baseResponse.StatusCode = StatusCode.NoData;
+					baseResponse.StatusCode = StatusCode.NotFound;
 					return baseResponse;
 				}
 
@@ -93,7 +93,7 @@ namespace PhoneMarket.Service.Implementations
 				if (phones.Count == 0)
 				{
 					baseResponse.Description = "List phones is empty";
-					baseResponse.StatusCode = StatusCode.NoData;
+					baseResponse.StatusCode = StatusCode.NotFound;
 					return baseResponse;
 				}
 
@@ -122,7 +122,7 @@ namespace PhoneMarket.Service.Implementations
 				if (phone == null)
 				{
 					baseResponse.Description = "There is no phone with this id";
-					baseResponse.StatusCode = StatusCode.NoData;
+					baseResponse.StatusCode = StatusCode.NotFound;
 					return baseResponse;
 				}
 
@@ -151,7 +151,7 @@ namespace PhoneMarket.Service.Implementations
 				if (phone == null)
 				{
 					baseResponse.Description = "There is no phone with this name";
-					baseResponse.StatusCode = StatusCode.NoData;
+					baseResponse.StatusCode = StatusCode.NotFound;
 					return baseResponse;
 				}
 
@@ -180,7 +180,7 @@ namespace PhoneMarket.Service.Implementations
 				if (phones == null)
 				{
 					baseResponse.Description = "There are no phones with this OS";
-					baseResponse.StatusCode = StatusCode.NoData;
+					baseResponse.StatusCode = StatusCode.NotFound;
 					return baseResponse;
 				}
 
@@ -209,7 +209,7 @@ namespace PhoneMarket.Service.Implementations
 				if (phones == null)
 				{
 					baseResponse.Description = "There are no phones with this price";
-					baseResponse.StatusCode = StatusCode.NoData;
+					baseResponse.StatusCode = StatusCode.NotFound;
 					return baseResponse;
 				}
 
@@ -225,6 +225,47 @@ namespace PhoneMarket.Service.Implementations
 					Description = $"[GetByPriceAsync]: {ex.Message}"
 				};
 			}
+		}
+
+		public async Task<IBaseResponse<Phone>> EditAsync(int id, PhoneViewModel model)
+		{
+			var baseResponse = new BaseResponse<Phone>();
+
+			try
+			{
+				var phone = await _phoneRepository.GetAsync(id);
+
+				if (phone == null)
+				{
+					baseResponse.Description = "The phone was not found";
+					baseResponse.StatusCode = StatusCode.NotFound;
+					return baseResponse;
+				}
+
+				ChangeData(model, phone);
+
+				await _phoneRepository.Update(phone);
+
+				return baseResponse;
+			}
+			catch (Exception ex)
+			{
+				return new BaseResponse<Phone>()
+				{
+					Description = $"[EditAsync]: {ex.Message}"
+				};
+			}
+		}
+
+		private static void ChangeData(PhoneViewModel model, Phone phone)
+		{
+			phone.Description = model.Description;
+			phone.DateCreate = model.DateCreate;
+			phone.Price = model.Price;
+			phone.TypePhone = model.TypePhone;
+			phone.Name = model.Name;
+			//TODO: to do os
+			//phone.TypeOperatingSystem = model.TypeOperatingSystem;
 		}
 	}
 }

@@ -61,7 +61,15 @@ namespace PhoneMarket.DAL.Repositories
 		{
 			return await Task.Run(
 				() => _db.Phones.Where(p => p.Price <= minPrice && p.Price >= maxPrice)
-			); 
+			);
+		}
+
+		public async Task<Phone> Update(Phone entity)
+		{
+			_db.Update(entity);
+			await _db.SaveChangesAsync();
+
+			return entity;
 		}
 	}
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using PhoneMarket.Domain.ViewModel;
 using PhoneMarket.Models;
 using PhoneMarket.Service.Interfaces;
 using System.Diagnostics;
@@ -22,6 +24,7 @@ namespace PhoneMarket.Controllers
 			{
 				return View(response.Data);
 			}
+
 			return RedirectToAction("Error");
 		}
 
@@ -33,7 +36,57 @@ namespace PhoneMarket.Controllers
 			{
 				return View(response.Data);
 			}
-			return Redirect("Error");
+
+			return RedirectToAction("Error");
+
+		}
+
+		[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> Delete(int id)
+		{
+			var response = await _phoneService.DeleteAsync(id);
+			if (response.StatusCode == Domain.Enum.StatusCode.OK)
+			{
+				return RedirectToAction("GetPhones");
+			}
+
+			return RedirectToAction("Error");
+		}
+
+		[HttpGet]
+		[Authorize(Roles = "Admin")]
+		public async Task<IActionResult> Save(int id)
+		{
+			if (id == 0)
+			{
+				return View();
+			}
+
+			var response = await _phoneService.GetAsync(id);
+			if (response.StatusCode == Domain.Enum.StatusCode.OK)
+			{
+				return View(response.Data);
+			}
+
+			return RedirectToAction("Error");
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Save(PhoneViewModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				if (model.Id == 0)
+				{
+					await _phoneService.CreateAsync(model);
+				}
+				else
+				{
+					await _phoneService.EditAsync(model.Id, model);
+				}
+			}
+
+			return RedirectToAction("GetPhones");
 		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
