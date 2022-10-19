@@ -63,7 +63,7 @@ namespace PhoneMarket.Service.Implementations
 				if (phone == null)
 				{
 					baseResponse.Description = "There is no phone with this id";
-					baseResponse.StatusCode = StatusCode.OK;
+					baseResponse.StatusCode = StatusCode.NoData;
 					return baseResponse;
 				}
 
@@ -93,7 +93,7 @@ namespace PhoneMarket.Service.Implementations
 				if (phones.Count == 0)
 				{
 					baseResponse.Description = "List phones is empty";
-					baseResponse.StatusCode = StatusCode.OK;
+					baseResponse.StatusCode = StatusCode.NoData;
 					return baseResponse;
 				}
 
@@ -122,7 +122,7 @@ namespace PhoneMarket.Service.Implementations
 				if (phone == null)
 				{
 					baseResponse.Description = "There is no phone with this id";
-					baseResponse.StatusCode = StatusCode.OK;
+					baseResponse.StatusCode = StatusCode.NoData;
 					return baseResponse;
 				}
 
@@ -151,7 +151,7 @@ namespace PhoneMarket.Service.Implementations
 				if (phone == null)
 				{
 					baseResponse.Description = "There is no phone with this name";
-					baseResponse.StatusCode = StatusCode.OK;
+					baseResponse.StatusCode = StatusCode.NoData;
 					return baseResponse;
 				}
 
@@ -180,7 +180,7 @@ namespace PhoneMarket.Service.Implementations
 				if (phones == null)
 				{
 					baseResponse.Description = "There are no phones with this OS";
-					baseResponse.StatusCode = StatusCode.OK;
+					baseResponse.StatusCode = StatusCode.NoData;
 					return baseResponse;
 				}
 
@@ -209,7 +209,7 @@ namespace PhoneMarket.Service.Implementations
 				if (phones == null)
 				{
 					baseResponse.Description = "There are no phones with this price";
-					baseResponse.StatusCode = StatusCode.OK;
+					baseResponse.StatusCode = StatusCode.NoData;
 					return baseResponse;
 				}
 

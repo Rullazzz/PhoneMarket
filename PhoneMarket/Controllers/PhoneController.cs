@@ -20,7 +20,18 @@ namespace PhoneMarket.Controllers
 			{
 				return View(response.Data);
 			}
-			return View("Error");
+			return RedirectToAction("Error");
+		}
+
+		[HttpGet]
+		public async Task<IActionResult> GetPhone(int id)
+		{
+			var response = await _phoneService.GetAsync(id);
+			if (response.StatusCode == Domain.Enum.StatusCode.OK)
+			{
+				return View(response.Data);
+			}
+			return RedirectToAction("Error");
 		}
 	}
 }
