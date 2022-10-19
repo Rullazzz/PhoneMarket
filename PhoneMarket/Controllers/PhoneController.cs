@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PhoneMarket.Models;
 using PhoneMarket.Service.Interfaces;
+using System.Diagnostics;
 
 namespace PhoneMarket.Controllers
 {
@@ -31,7 +33,13 @@ namespace PhoneMarket.Controllers
 			{
 				return View(response.Data);
 			}
-			return RedirectToAction("Error");
+			return Redirect("Error");
+		}
+
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		public IActionResult Error()
+		{
+			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
 	}
 }
